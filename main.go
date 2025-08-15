@@ -1,10 +1,9 @@
 package main
 
 import (
-	"log"
 	"clone_media/config"
-	socket_config "clone_media/config/socket-config"
 	oauth2_setup "clone_media/config/oauth2-setup"
+	socket_config "clone_media/config/socket-config"
 	"clone_media/internal/auth/route"
 	roleModel "clone_media/internal/role/model"
 	roleRoute "clone_media/internal/role/route"
@@ -13,8 +12,10 @@ import (
 	"clone_media/internal/user"
 	baseUserModel "clone_media/internal/user/model"
 	baseUserRoute "clone_media/internal/user/route"
+	"clone_media/pkg/common/ssh_tunnel"
+	"log"
 
-	 _ "clone_media/docs"
+	_ "clone_media/docs"
 	global_gin_context "clone_media/global/global-gin-context"
 	global_validation "clone_media/global/global-validation"
 	"clone_media/pkg/common/database" // Add this line to import the database package
@@ -44,10 +45,11 @@ func init() {
 	// load .env
 	config.LoadEnvVariables()
 
+	ssh_tunnel.ConnectWithSSHTunnel()
 	// load database connection
 	database.ConnectToDB()
 
-    // load oAuth2 server
+	// load oAuth2 server
 	oauth2_setup.SetUpOAuth2()
 
 	// paseto setup

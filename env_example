@@ -1,5 +1,12 @@
 PORT=8080
-DB_URL=host=localhost user=postgres password=admin dbname=clone_media port=5432
+
+DB_URL=postgres://<username server>:<password server>@127.0.0.1:5433/clone_media_cloud?sslmode=disable
+#DB_URL=postgres://<username local>:<password local>@127.0.0.1:5432/clone_media?sslmode=disable
+
+SERVER_URL=13.235.80.7
+DB_MODE="local"
+
+PPM_PATH=<path to pem file>
 
 
 

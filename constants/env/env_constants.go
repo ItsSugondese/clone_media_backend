@@ -1,0 +1,13 @@
+package env
+
+var (
+	PORT                     = "PORT"
+	DB_URL                   = "DB_URL"
+	SERVER_URL               = "SERVER_URL"
+	DB_MODE                  = "DB_MODE"
+	PPM_PATH                 = "PPM_PATH"
+	ACCESS_TOKEN_PRIVATE_KEY = "ACCESS_TOKEN_PRIVATE_KEY"
+	ACCESS_TOKEN_PUBLIC_KEY  = "ACCESS_TOKEN_PUBLIC_KEY"
+	ACCESS_TOKEN_EXPIRED_IN  = "ACCESS_TOKEN_EXPIRED_IN"
+	ACCESS_TOKEN_MAXAGE      = "ACCESS_TOKEN_MAXAGE"
+)
