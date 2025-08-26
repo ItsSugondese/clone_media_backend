@@ -12,21 +12,19 @@ pipeline {
     }
 
     post {
-            success {
-                echo 'Build succeeded - GitHub will receive SUCCESS status'
-                // Jenkins automatically sends: {"state": "success", "description": "Build succeeded"}
-            }
-            failure {
-                echo 'Build failed - GitHub will receive FAILURE status'
-                // Jenkins automatically sends: {"state": "failure", "description": "Build failed"}
-            }
-            unstable {
-                echo 'Build unstable - GitHub will receive FAILURE status'
-                // Jenkins automatically sends: {"state": "failure", "description": "Build unstable"}
-            }
-            aborted {
-                echo 'Build aborted - GitHub will receive ERROR status'
-                // Jenkins automatically sends: {"state": "error", "description": "Build aborted"}
-            }
+        success {
+            genericstatus([
+                description: 'Build succeeded',
+                state: 'success',
+                targetUrl: env.BUILD_URL
+            ])
         }
+        failure {
+            genericstatus([
+                description: 'Build failed',
+                state: 'failure',
+                targetUrl: env.BUILD_URL
+            ])
+        }
+    }
 }
