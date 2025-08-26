@@ -12,19 +12,25 @@ pipeline {
     }
 
     post {
-        success {
-            genericstatus([
-                description: 'Build succeeded',
-                state: 'success',
-                targetUrl: env.BUILD_URL
-            ])
-        }
-        failure {
-            genericstatus([
-                description: 'Build failed',
-                state: 'failure',
-                targetUrl: env.BUILD_URL
-            ])
+        always {
+            script {
+                def status = currentBuild.currentResult
+                def state = status == 'SUCCESS' ? 'success' : 'failure'
+                def description = "Build ${status.toLowerCase()}"
+
+                sh """
+                    curl -X POST \\
+                         -H "Authorization: token \${GITHUB_TOKEN}" \\
+                         -H "Content-Type: application/json" \\
+                         -d '{
+                             "state": "${state}",
+                             "target_url": "${env.BUILD_URL}",
+                             "description": "${description}",
+                             "context": "continuous-integration/jenkins"
+                         }' \\
+                         "https://api.github.com/repos/\${GITHUB_REPO}/statuses/\${GIT_COMMIT}"
+                """
+            }
         }
     }
 }
