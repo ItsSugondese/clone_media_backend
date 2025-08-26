@@ -3,7 +3,7 @@ pipeline {
 
     environment {
             GITHUB_TOKEN = credentials('GitHub Token')
-            GITHUB_REPO = 'https://github.com/ItsSugondese/clone_media_backend.git'
+            GITHUB_REPO = 'ItsSugondese/clone_media_backend.git'
     }
     stages {
 
