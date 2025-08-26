@@ -10,4 +10,18 @@ pipeline {
             }
         }
     }
+
+    post {
+            always {
+                // This will report the build status back to GitHub
+                publishHTML([
+                    allowMissing: false,
+                    alwaysLinkToLastBuild: true,
+                    keepAll: true,
+                    reportDir: 'reports',
+                    reportFiles: 'index.html',
+                    reportName: 'Build Report'
+                ])
+            }
+        }
 }
