@@ -132,7 +132,7 @@ func main() {
 	r.Static("/images", "./images")
 
 	r.Run()
-}
+
 
 func setupPaseto() {
 	tokenMaker, err := paseto_token.NewPaseto("abcdefghijkl12345678901234567890")
