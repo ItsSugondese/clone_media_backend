@@ -60,7 +60,7 @@ jobs:
             cd /home/ec2-user/projects/golang/clone_media_backend && \
             mv .env ../
             git pull origin main && \
-            mv ../testing ./
+            mv ../.env ./
             docker-compose down && \
             docker-compose up -d --build
           "
