@@ -43,3 +43,22 @@ jobs:
       - name: Build
         run: go build -v ./...
 
+  deploy:
+    runs-on: ubuntu-latest
+    needs: build
+    steps:
+      - name: Setup SSH
+        run: |
+          mkdir -p ~/.ssh
+          echo "${{ secrets.EC2_KEY }}" > ~/.ssh/id_rsa
+          chmod 600 ~/.ssh/id_rsa
+          ssh-keyscan -H ${{ secrets.EC2_HOST }} >> ~/.ssh/known_hosts
+
+      - name: Deploy on EC2
+        run: |
+          ssh ec2-user@${{ secrets.EC2_HOST }} "
+            cd /home/ec2-user/projects/golang/clone_media_backend && \
+            git pull origin main && \
+            docker-compose down && \
+            docker-compose up -d --build
+          "

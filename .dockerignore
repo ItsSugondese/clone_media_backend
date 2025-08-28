@@ -1,0 +1,9 @@
+# Test and documentation files
+*.test
+*.md
+
+# IDE and editor folders
+.vscode/
+.idea/
+.github
+.git

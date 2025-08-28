@@ -12,7 +12,7 @@ import (
 )
 
 func ConnectWithSSHTunnel() {
-	mode := os.Getenv("DB_MODE") // "ssh" or "local"
+	mode := os.Getenv(env.DB_MODE) // "ssh" or "local"
 	if mode == "ssh" {
 		err := startSSHTunnel(
 			"ec2-user",
