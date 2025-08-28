@@ -3,9 +3,9 @@ services:
     build:
       context: .
       dockerfile: Dockerfile
+      network_mode: host
     container_name: myapp_container
 #    image: clone-media:local-test-clone-media
-    network_mode: host
     env_file:
       - .env
 #    ports:
