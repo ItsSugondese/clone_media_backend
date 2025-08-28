@@ -4,6 +4,7 @@ WORKDIR /app
 
 # Copy only go.mod + go.sum first (so deps cache can be reused)
 COPY go.mod go.sum ./
+RUN curl -v https://proxy.golang.org
 RUN go mod download
 
 COPY . .
