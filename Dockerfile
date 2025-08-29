@@ -4,9 +4,9 @@ WORKDIR /app
 
 # Copy only go.mod + go.sum first (so deps cache can be reused)
 COPY go.mod go.sum ./
-COPY . .
+RUN go mod download
 ENV CGO_ENABLED=0
-RUN go mod download all
+COPY . .
 
 RUN  GOOS=linux go build -o myapp .
 
