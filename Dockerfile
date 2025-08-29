@@ -4,11 +4,11 @@ WORKDIR /app
 
 # Copy only go.mod + go.sum first (so deps cache can be reused)
 COPY go.mod go.sum ./
-RUN curl -v https://proxy.golang.org
+COPY . .
+ENV CGO_ENABLED=0
 RUN go mod download all
 
-COPY . .
-RUN CGO_ENABLED=0 GOOS=linux go build -o myapp .
+RUN  GOOS=linux go build -o myapp .
 
 
 # Run stage
